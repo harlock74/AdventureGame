@@ -1,3 +1,5 @@
+// A very simple Adventure Game written in C. Still WIP.
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -38,83 +40,83 @@ typedef struct{
  */ 
 
 void initRooms(Room rooms[ ]){
-    // Room 0: Entrance Hall 
+	// Room 0: Entrance Hall 
     //strcpy(rooms[0], "Entrance Hall");
-    rooms[0].name = "Entrance Hall";
+	rooms[0].name = "Entrance Hall";
     rooms[0].north = 1;
     rooms[0].south = -1;
     rooms[0].east = 2;
     rooms[0].west = -1;
-    rooms[0].hasKey = false;
+	rooms[0].hasKey = false;
     rooms[0].isLocked = false;
 
     // Room 1: Throne Room with Key1
     //strcpy(rooms[1].name, "Throne Room");
-    rooms[1].name = "Throne Room";
+	rooms[1].name = "Throne Room";
     rooms[1].north = 4;
     rooms[1].south = 0;
     rooms[1].east = -1;
     rooms[1].west = 5;
-    rooms[1].hasKey = true;  // Key 1
+	rooms[1].hasKey = true;  // Key 1
     rooms[1].isLocked = false;
 
     // Room 2: Dining Room
     //strcpy(rooms[2].name, "Dining Room");
     rooms[2].name = "Dining Room";
-    rooms[2].north = 3;
+	rooms[2].north = 3;
     rooms[2].south = -1;
     rooms[2].east = 7;
     rooms[2].west = 0;
-    rooms[2].hasKey = false;
+	rooms[2].hasKey = false;
     rooms[2].isLocked = false;
 
     // Room 3: Kitchen
     //strcpy(rooms[3].name, "Kitchen");
     rooms[3].name = "Kitchen";
-    rooms[3].north = -1;
+	rooms[3].north = -1;
     rooms[3].south = 2;
     rooms[3].east = -1;
     rooms[3].west = -1;
-    rooms[3].hasKey = false;
+	rooms[3].hasKey = false;
     rooms[3].isLocked = false;
 
     // Room 4: Balcony which is locked and needs Key1
     //strcpy(rooms[4].name, "Balcony");
     rooms[4].name = "Balcony";
-    rooms[4].north = -1;
+	rooms[4].north = -1;
     rooms[4].south = 1;
     rooms[4].east = 6;
     rooms[4].west = -1;
-    rooms[4].hasKey = false;
+	rooms[4].hasKey = false;
     rooms[4].isLocked = true;  // Locked Room
 
     // Room 5: Armory
     //strcpy(rooms[5].name, "Armory");
     rooms[5].name = "Armory";
-    rooms[5].north = -1;
+	rooms[5].north = -1;
     rooms[5].south = -1;
     rooms[5].east = 1;
     rooms[5].west = -1;
-    rooms[5].isLocked = false;
+	rooms[5].isLocked = false;
 
     // Room 6: Library with Key2
     //strcpy(rooms[6].name, "Library");
     rooms[6].name = "Library";
-    rooms[6].north = -1;
+	rooms[6].north = -1;
     rooms[6].south = -1;
     rooms[6].east = -1;
     rooms[6].west = 4;
-    rooms[6].hasKey = true;  // Key 2
+	rooms[6].hasKey = true;  // Key 2
     rooms[6].isLocked = false;
 
     // Room 7: Secret Chamber which is locked and need Key2
     //strcpy(rooms[7].name, "Secret Chamber");
     rooms[7].name = "Secret Chamber";
-    rooms[7].north = -1;
+	rooms[7].north = -1;
     rooms[7].south = -1;
     rooms[7].east = -1;
     rooms[7].west = 2;
-    rooms[7].hasKey = false;
+	rooms[7].hasKey = false;
     rooms[7].isLocked = true;  // Locked Room
 }
 
