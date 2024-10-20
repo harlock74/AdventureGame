@@ -69,68 +69,68 @@ void initRooms(Room rooms[ ]){
 
     // Room 2: Dining Room
     //strcpy(rooms[2].name, "Dining Room");
-    rooms[2].name = "Dining Room";
+	rooms[2].name = "Dining Room";
 	rooms[2].north = 3;
-    rooms[2].south = -1;
-    rooms[2].east = 7;
-    rooms[2].west = 0;
+	rooms[2].south = -1;
+	rooms[2].east = 7;
+	rooms[2].west = 0;
 	rooms[2].hasKey = false;
-    rooms[2].isLocked = false;
-    rooms[2].x = 3; rooms[2].y = 2;
+	rooms[2].isLocked = false;
+	rooms[2].x = 3; rooms[2].y = 2;
 
     // Room 3: Kitchen
     //strcpy(rooms[3].name, "Kitchen");
-    rooms[3].name = "Kitchen";
+	rooms[3].name = "Kitchen";
 	rooms[3].north = -1;
-    rooms[3].south = 2;
-    rooms[3].east = -1;
-    rooms[3].west = -1;
+	rooms[3].south = 2;
+	rooms[3].east = -1;
+	rooms[3].west = -1;
 	rooms[3].hasKey = false;
-    rooms[3].isLocked = false;
+	rooms[3].isLocked = false;
 	rooms[3].x = 3; rooms[3].y = 1;
 
 
     // Room 4: Balcony which is locked and needs Key1
     //strcpy(rooms[4].name, "Balcony");
-    rooms[4].name = "Balcony";
+	rooms[4].name = "Balcony";
 	rooms[4].north = -1;
-    rooms[4].south = 1;
-    rooms[4].east = 6;
-    rooms[4].west = -1;
+	rooms[4].south = 1;
+	rooms[4].east = 6;
+	rooms[4].west = -1;
 	rooms[4].hasKey = false;
-    rooms[4].isLocked = true;  // Locked Room
-    rooms[4].x = 2; rooms[4].y = 0;
+	rooms[4].isLocked = true;  // Locked Room
+	rooms[4].x = 2; rooms[4].y = 0;
 
     // Room 5: Armory
     //strcpy(rooms[5].name, "Armory");
-    rooms[5].name = "Armory";
+	rooms[5].name = "Armory";
 	rooms[5].north = -1;
-    rooms[5].south = -1;
-    rooms[5].east = 1;
-    rooms[5].west = -1;
+	rooms[5].south = -1;
+	rooms[5].east = 1;
+	rooms[5].west = -1;
 	rooms[5].isLocked = false;
-    rooms[5].x = 1; rooms[5].y = 1;
+	rooms[5].x = 1; rooms[5].y = 1;
 
     // Room 6: Library with Key2
     //strcpy(rooms[6].name, "Library");
-    rooms[6].name = "Library";
+	rooms[6].name = "Library";
 	rooms[6].north = -1;
-    rooms[6].south = -1;
-    rooms[6].east = -1;
-    rooms[6].west = 4;
+	rooms[6].south = -1;
+	rooms[6].east = -1;
+	rooms[6].west = 4;
 	rooms[6].hasKey = true;  // Key 2
-    rooms[6].isLocked = false;
-    rooms[6].x = 3; rooms[6].y = 0;
+	rooms[6].isLocked = false;
+	rooms[6].x = 3; rooms[6].y = 0;
 
     // Room 7: Secret Chamber which is locked and need Key2
     //strcpy(rooms[7].name, "Secret Chamber");
-    rooms[7].name = "Secret Chamber";
+	rooms[7].name = "Secret Chamber";
 	rooms[7].north = -1;
-    rooms[7].south = -1;
-    rooms[7].east = -1;
-    rooms[7].west = 2;
+	rooms[7].south = -1;
+	rooms[7].east = -1;
+	rooms[7].west = 2;
 	rooms[7].hasKey = false;
-    rooms[7].isLocked = true;  // Locked Room
+	rooms[7].isLocked = true;  // Locked Room
 	rooms[7].x = 4; rooms[7].y = 2;
 
 }
