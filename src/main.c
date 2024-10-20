@@ -5,6 +5,8 @@
 #include <stdbool.h>
 
 #define ROOMS_NUMBER 8
+#define MAP_WIDTH 7
+#define MAP_HEIGHT 5
 
 typedef struct{
 	//char name[30];
@@ -15,11 +17,13 @@ typedef struct{
 	int west;
 	bool hasKey;
 	bool isLocked;
+	int x, y;  // Room's Coordinates on the map
 } Room;
 
 typedef struct{
 	bool hasKey1;
 	bool hasKey2;
+	int x, y;  // Player's coordinates on the map
 } Player;
 
 /*   x = invalid direction
@@ -43,22 +47,25 @@ void initRooms(Room rooms[ ]){
 	// Room 0: Entrance Hall 
     //strcpy(rooms[0], "Entrance Hall");
 	rooms[0].name = "Entrance Hall";
-    rooms[0].north = 1;
-    rooms[0].south = -1;
-    rooms[0].east = 2;
-    rooms[0].west = -1;
+	rooms[0].north = 1;
+	rooms[0].south = -1;
+	rooms[0].east = 2;
+	rooms[0].west = -1;
 	rooms[0].hasKey = false;
-    rooms[0].isLocked = false;
+	rooms[0].isLocked = false;
+	rooms[0].x = 2; rooms[0].y = 2;
 
     // Room 1: Throne Room with Key1
     //strcpy(rooms[1].name, "Throne Room");
 	rooms[1].name = "Throne Room";
-    rooms[1].north = 4;
-    rooms[1].south = 0;
-    rooms[1].east = -1;
-    rooms[1].west = 5;
+	rooms[1].north = 4;
+	rooms[1].south = 0;
+	rooms[1].east = -1;
+	rooms[1].west = 5;
 	rooms[1].hasKey = true;  // Key 1
-    rooms[1].isLocked = false;
+	rooms[1].isLocked = false;
+	rooms[1].x = 2; rooms[1].y = 1;
+
 
     // Room 2: Dining Room
     //strcpy(rooms[2].name, "Dining Room");
@@ -69,6 +76,7 @@ void initRooms(Room rooms[ ]){
     rooms[2].west = 0;
 	rooms[2].hasKey = false;
     rooms[2].isLocked = false;
+    rooms[2].x = 3; rooms[2].y = 2;
 
     // Room 3: Kitchen
     //strcpy(rooms[3].name, "Kitchen");
@@ -79,6 +87,8 @@ void initRooms(Room rooms[ ]){
     rooms[3].west = -1;
 	rooms[3].hasKey = false;
     rooms[3].isLocked = false;
+	rooms[3].x = 3; rooms[3].y = 1;
+
 
     // Room 4: Balcony which is locked and needs Key1
     //strcpy(rooms[4].name, "Balcony");
@@ -89,6 +99,7 @@ void initRooms(Room rooms[ ]){
     rooms[4].west = -1;
 	rooms[4].hasKey = false;
     rooms[4].isLocked = true;  // Locked Room
+    rooms[4].x = 2; rooms[4].y = 0;
 
     // Room 5: Armory
     //strcpy(rooms[5].name, "Armory");
@@ -98,6 +109,7 @@ void initRooms(Room rooms[ ]){
     rooms[5].east = 1;
     rooms[5].west = -1;
 	rooms[5].isLocked = false;
+    rooms[5].x = 1; rooms[5].y = 1;
 
     // Room 6: Library with Key2
     //strcpy(rooms[6].name, "Library");
@@ -108,6 +120,7 @@ void initRooms(Room rooms[ ]){
     rooms[6].west = 4;
 	rooms[6].hasKey = true;  // Key 2
     rooms[6].isLocked = false;
+    rooms[6].x = 3; rooms[6].y = 0;
 
     // Room 7: Secret Chamber which is locked and need Key2
     //strcpy(rooms[7].name, "Secret Chamber");
@@ -118,7 +131,40 @@ void initRooms(Room rooms[ ]){
     rooms[7].west = 2;
 	rooms[7].hasKey = false;
     rooms[7].isLocked = true;  // Locked Room
+	rooms[7].x = 4; rooms[7].y = 2;
+
 }
+
+void displayMap(Room rooms[ ], Player player) {
+    char map[MAP_HEIGHT][MAP_WIDTH];
+
+    // Initialize the map with empty spaces
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            map[i][j] = ' ';
+        }
+    }
+
+    // Place each room on the map
+    for (int i = 0; i < ROOMS_NUMBER; i++) {
+        map[rooms[i].y][rooms[i].x] = 'R';
+    }
+
+    // Place the player on the map
+    map[player.y][player.x] = 'P';
+
+    // Display the map
+    printf("\nMap:\n");
+	 printf("\n");
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            printf("%c ", map[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 
 void move_player(char direction, Room rooms[ ], int *currentRoom, Player *player) {
     int nextRoom = -1;
@@ -138,13 +184,17 @@ void move_player(char direction, Room rooms[ ], int *currentRoom, Player *player
 	  if ((nextRoom == 4 && player->hasKey1) || (nextRoom == 7 && player->hasKey2)) {
 			rooms[nextRoom].isLocked = false;  // Unlock the room
 			*currentRoom = nextRoom;
+			player->x = rooms[*currentRoom].x;
+		    player->y = rooms[*currentRoom].y;
 			printf("You used a key to unlock %s.\n", rooms[*currentRoom].name);
 	  } else {
             printf("The door to %s is locked. You need a key.\n", rooms[nextRoom].name);
 	  }	
     } else {
         *currentRoom = nextRoom;
-        printf("You moved to %s\n", rooms[*currentRoom].name);
+		player->x = rooms[*currentRoom].x;
+		player->y = rooms[*currentRoom].y;
+		printf("You moved to %s\n", rooms[*currentRoom].name);
     }
     // Check if the current room has a key
     if (rooms[*currentRoom].hasKey) {
@@ -161,7 +211,7 @@ void move_player(char direction, Room rooms[ ], int *currentRoom, Player *player
 
 int main() {
 	Room rooms[ROOMS_NUMBER];
-	Player player = {false, false};
+	Player player = {false, false, 2, 2};
 	initRooms(rooms);
 	
 	char player_name[30];
@@ -180,9 +230,10 @@ int main() {
 	
 	while(1)
 	{
-		   printf("You are in the %s.\n", rooms[currentRoom].name);
-		   printf("Where do you want to move: (N)orth, (S)outh, (E)ast, (W)est? Or Q to quit.\n");
-		   scanf(" %c", &player_input); 
+			displayMap(rooms, player);
+			printf("You are in the %s.\n", rooms[currentRoom].name);
+			printf("Where do you want to move: (N)orth, (S)outh, (E)ast, (W)est? Or Q to quit.\n");
+			scanf(" %c", &player_input); 
 		   
 		   /*The space before %c is needed to skip any leading whitespace chrarcters
 		     including newlines, so this will prevent it from reading the newline as input.
